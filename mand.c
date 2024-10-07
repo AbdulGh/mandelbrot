@@ -95,17 +95,25 @@ void redraw(void) {
 }
 
 void shift(Direction direction) {
-  int m = 8;
-  FloatType xgap = (viewport_r - viewport_l) / m;
-  FloatType ygap = (viewport_b - viewport_t) / m;
-  FloatType mid = (viewport_l + viewport_r) / 2;
+  double m = 1.3;
+  int shift = 8;
+  FloatType xgap = (viewport_r - viewport_l) / shift;
+  FloatType ygap = (viewport_b - viewport_t) / shift;
+  FloatType midx = (viewport_l + viewport_r) / 2;
+  FloatType midy = (viewport_t + viewport_b) / 2;
 
   switch(direction) {
     case IN:
-
+      viewport_l = (viewport_l + (m - 1) * midx) / m;
+      viewport_r = (viewport_r + (m - 1) * midx) / m;
+      viewport_b = (viewport_b + (m - 1) * midy) / m;
+      viewport_t = (viewport_t + (m - 1) * midy) / m;
       break;
     case OUT:
-      //todo
+      viewport_l = (1 - m) * midx + m * viewport_l;
+      viewport_r = (1 - m) * midx + m * viewport_r;
+      viewport_b = (1 - m) * midy + m * viewport_b;
+      viewport_t = (1 - m) * midy + m * viewport_t;
       break;
     case LEFT:
       viewport_l += xgap;
@@ -124,7 +132,7 @@ void shift(Direction direction) {
       viewport_b += ygap;
       break;
     default:
-      fprintf(stderr, "something went wrong\n");
+    __builtin_unreachable();
   }
   redraw();
   show();

@@ -3,9 +3,9 @@
 
 #include "common.h"
 
-void initFrameBuffers(void);
+void initFrameBuffer(void);
 
-void cleanupFrameBuffers(void);
+void cleanupFrameBuffer(void);
 
 void show();
 

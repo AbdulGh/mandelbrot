@@ -37,13 +37,13 @@ void cleanup(void) {
   tty.c_lflag |= (ICANON | ECHO);
   tcsetattr(STDIN_FILENO, TCSANOW, &tty);
   fputs("\033[0m", stdout);
-  cleanupFrameBuffers();
+  cleanupFrameBuffer();
   cleanupMandelbrot();
 }
 
 void init(void) {
   getWidthAndHeight();
-  initFrameBuffers();
+  initFrameBuffer();
   initMandelbrot();
 
   //disable line buffering to grab chars
@@ -59,8 +59,8 @@ void handleWINCH(int sig) {
   getWidthAndHeight();
   
   // pickup new sizes
-  cleanupFrameBuffers();
-  initFrameBuffers();
+  cleanupFrameBuffer();
+  initFrameBuffer();
   resize();
 }
 

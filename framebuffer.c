@@ -10,7 +10,7 @@ const size_t ST_R = 7;
 const size_t ST_C = 19;
 const size_t ST_SIZE = 20;
 
-void initFrameBuffers(void) {
+void initFrameBuffer(void) {
   size_t rowSize = ST_SIZE * w;
 
   framebuffer = (char*) mallocAligned(h * (rowSize + 1) + 1);
@@ -26,8 +26,7 @@ void initFrameBuffers(void) {
   framebuffer[h * (rowSize + 1)] = '\0';
 }
 
-//todo rename
-void cleanupFrameBuffers(void) {
+void cleanupFrameBuffer(void) {
   free(framebuffer);
 }
 
